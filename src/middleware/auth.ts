@@ -41,6 +41,6 @@ export const authenticate = async (
 
     next();
   } catch (error) {
-    res.status(500).json({ error: `Token No Valido ${ error }` });
+    res.status(500).json({ error: `Token No Valido ${error}` });
   }
 };

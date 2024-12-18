@@ -66,6 +66,4 @@ export class UserService {
 
     return { message: 'Cambio de datos correctamente' };
   }
-
-
 }

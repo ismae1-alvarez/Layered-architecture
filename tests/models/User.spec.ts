@@ -37,6 +37,8 @@ describe('Inserción de datos en la base de datos', () => {
     expect(foundUsers[1].email).toBe('ana@example.com');
 
     // Verificar si hay errores al insertar usuarios duplicados
-    await expect(User.insertMany(usersData)).rejects.toThrow('E11000 duplicate key error');
+    await expect(User.insertMany(usersData)).rejects.toThrow(
+      'E11000 duplicate key error',
+    );
   });
 });

@@ -26,7 +26,4 @@ export class UserDAO {
 
     return await user.save();
   }
-
-
- 
 }

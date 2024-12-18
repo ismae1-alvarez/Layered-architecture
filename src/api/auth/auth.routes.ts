@@ -186,5 +186,4 @@ authRouter.put(
   AuthController.updateProfile,
 );
 
-
 export default authRouter;

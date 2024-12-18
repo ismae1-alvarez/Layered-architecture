@@ -1,24 +1,36 @@
 import ts from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import prettier from "eslint-plugin-prettier";
 
 export default [
   {
-    files: ["**/*.ts"], // Asegúrate de cubrir tanto .ts como .tsx
-    parser: tsParser, // Configura el parser adecuado para TypeScript
-    parserOptions: {
-      ecmaVersion: "latest", // Usa la última versión de ECMAScript
-      sourceType: "module",  // Define el tipo de módulos (especifica 'module' para usar import/export)
+    files: ["**/*.ts", "**/*.tsx"], 
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        require: "readonly",
+        process: "readonly",
+        __dirname: "readonly",
+        module: "readonly",
+      },
     },
     plugins: {
-      "@typescript-eslint": ts, // Activa el plugin de TypeScript
+      "@typescript-eslint": ts,
+      "prettier": prettier
     },
+    extends: [
+      "plugin:@typescript-eslint/recommended",  // Reglas de ESLint para TypeScript
+      "prettier",  // Desactiva las reglas de ESLint que pueden entrar en conflicto con Prettier
+      "plugin:prettier/recommended",  // Habilita las reglas recomendadas de Prettier
+      ["@commitlint/config-conventional"]
+    ],
     rules: {
-      // Advierte sobre variables no usadas
       "@typescript-eslint/no-unused-vars": ["warn"],
-      // Exige punto y coma
       "semi": ["error", "always"],
-      // Exige comillas dobles
-      "quotes": ["error", "double"]
+      "quotes": ["error", "double"],
+      "prettier/prettier": ["error"],  // Marca como error si Prettier no está configurado
     },
   },
 ];

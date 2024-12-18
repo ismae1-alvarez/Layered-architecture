@@ -8,8 +8,8 @@ export class AppRoutes {
 
     // Ejemplo de api, solo puro ejemplo
     routes.get('/', (_req: Request, res: Response) => {
-      res.send('hola desde mi API'); 
-    }); 
+      res.send('hola desde mi API');
+    });
     // Router Auth
 
     routes.use(authRouter);
