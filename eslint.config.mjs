@@ -3,21 +3,14 @@ import tsParser from "@typescript-eslint/parser";
 
 export default [
   {
-    files: ["**/*.ts"], 
-    languageOptions: {
-      parser: tsParser,
-      ecmaVersion: "latest",
-      sourceType: "module",
-      globals: {
-        // Define las variables globales aquí (por ejemplo, para Node.js):
-        require: "readonly",
-        process: "readonly",
-        __dirname: "readonly",
-        module: "readonly",
-      }
+    files: ["**/*.ts"], // Asegúrate de cubrir tanto .ts como .tsx
+    parser: tsParser, // Configura el parser adecuado para TypeScript
+    parserOptions: {
+      ecmaVersion: "latest", // Usa la última versión de ECMAScript
+      sourceType: "module",  // Define el tipo de módulos (especifica 'module' para usar import/export)
     },
     plugins: {
-      "@typescript-eslint": ts
+      "@typescript-eslint": ts, // Activa el plugin de TypeScript
     },
     rules: {
       // Advierte sobre variables no usadas
@@ -25,7 +18,7 @@ export default [
       // Exige punto y coma
       "semi": ["error", "always"],
       // Exige comillas dobles
-      "quotes": ["error", "double"] 
-    }
-  }
+      "quotes": ["error", "double"]
+    },
+  },
 ];

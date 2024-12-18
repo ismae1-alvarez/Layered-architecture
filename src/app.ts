@@ -2,7 +2,7 @@ import { envs, logger } from './config';
 import app from './server';
 
 // PORT
-const port = envs.PORT || 4000;
+const port:number = envs.PORT || 4000;
 
 const server = app.listen(port, () => {
   logger.info(`REST API Funcionando en el puerto ${port}`);

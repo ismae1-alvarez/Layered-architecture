@@ -1,8 +1,13 @@
 import { Router } from 'express';
-import { body } from 'express-validator';
 import { handleInputErrores } from '../../middleware/validation';
 import { AuthController } from './auth.controller';
 import { authenticate } from '../../middleware/auth';
+
+import {
+  validateCreateAccount,
+  validateLogin,
+  validateUpdateProfile,
+} from '../../middleware/auth.validations';
 
 const authRouter: Router = Router();
 
@@ -73,16 +78,7 @@ const authRouter: Router = Router();
  */
 authRouter.post(
   '/create-account',
-  body('name').notEmpty().withMessage('El nombre no debe ir vacío'),
-  body('password')
-    .isLength({ min: 8 })
-    .withMessage('El password es muy corto, mínimo 8 caracteres'),
-  body('password_confirmation').custom((value, { req }) => {
-    if (value !== req.body.password)
-      throw new Error('Los password no son iguales');
-    return true;
-  }),
-  body('email').isEmail().withMessage('El e-mail no es válido'),
+  validateCreateAccount,
   handleInputErrores,
   AuthController.createAccount,
 );
@@ -120,8 +116,7 @@ authRouter.post(
  */
 authRouter.post(
   '/login',
-  body('email').notEmpty().withMessage('El e-mail no debe ir vacio'),
-  body('password').notEmpty().withMessage('El password no debe ir vacio'),
+  validateLogin,
   handleInputErrores,
   AuthController.login,
 );
@@ -186,8 +181,7 @@ authRouter.get('/user', authenticate, AuthController.user);
 authRouter.put(
   '/profile',
   authenticate,
-  body('name').notEmpty().withMessage('El nombre no debe ir vacio'),
-  body('email').notEmpty().withMessage('El e-mail no debe ir vacio'),
+  validateUpdateProfile,
   handleInputErrores,
   AuthController.updateProfile,
 );
