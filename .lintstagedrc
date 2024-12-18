@@ -3,6 +3,9 @@
       "eslint --fix",
       "prettier --write",
       "git add"
+    ], 
+    "tests/**/*.{ts,js}":[
+      "pnpm run test"
     ]
   }
   
